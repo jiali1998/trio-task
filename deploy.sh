@@ -1,4 +1,24 @@
 #!/bin/bash
+# echo "Stopping All Containers..."
+# docker stop \$(docker ps -a --format "{{.ID}}") || exit 0
+# echo "Removing All Containers..."
+# docker rm \$(docker ps -a --format "{{.ID}}") || exit 0
+# echo "Removing all Images..."
+# docker rmi \$(docker images --format "{{.ID}}") || exit 0
+
+# Store list of running containerIDs in a variable 
+containers=$(docker ps -q)
+echo ${containers}
+
+# Stop the running containers
+docker stop ${containers}
+
+# Remove the containers
+docker rm ${containers}
+
+# Remove all images
+docker rmi $(docker images -q)
+
 #Create network
 docker network create trio-task-network
 
